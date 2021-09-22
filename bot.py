@@ -1,11 +1,18 @@
 import lightbulb
 import os
 
-from rpg import Rpg
+from rpgplugin import RpgPlugin
+from rpgmanager import RpgManager
 
-TOKEN = os.environ.get("jarvis")
+class Bot(lightbulb.Bot):
+	def __init__(self, *, token, prefix):
+		super().__init__(token=token, prefix=prefix)
+		self.add_plugin(RpgPlugin())
 
-bot = lightbulb.Bot(token=TOKEN, prefix="jarvis ", logs="INFO")
-bot.add_plugin(Rpg())
+		self.manager = RpgManager()
 
-bot.run()
+
+if __name__ == "__main__":
+	TOKEN = os.environ.get("jarvis")
+	bot = Bot(token=TOKEN, prefix="jarvis ")
+	bot.run()
