@@ -1,6 +1,5 @@
-import random
-
 from rpgclasses import User
+from rpgclasses import Weapon
 from utils import safe_load
 
 class GameState:
@@ -9,10 +8,9 @@ class GameState:
 		
 	def load(self, file):
 		config = safe_load(file)
-		self.shop_text = config["shop-text"]
+		self._weapons = Weapon.loader(config["weapons"])
 
 	def user(self, id):
-		# if user id not found, make a new user
 		# TODO: properly handle key errors later
 		if id not in self._users:
 			self._users[id] = User()
@@ -28,4 +26,14 @@ class GameInterface:
 		return self.state.user(id).bal
 
 	def shop(self):
-		return self.state.shop_text
+		shop_text = ""
+
+		shop_text += "__Weapons__\n"
+		for weapon in self.state._weapons:
+			shop_text += str(weapon) + '\n'
+		
+		return shop_text
+
+	
+	def profile(self, id):
+		return self.state.user(id)

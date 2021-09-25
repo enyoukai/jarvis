@@ -1,5 +1,11 @@
 ---
 shop-text: "It's so cold"
-picks:
-  - name: "Basic Pick"
-    mul: 1
+weapons: 
+  - name: "Wooden Sword"
+    value: 0
+    atk: 5
+    desc: "So weak lol"
+  - name: "Iron Sword"
+    value: 100
+    atk: 15
+    desc: "Now you can fight more than just slimes"
