@@ -1,12 +1,15 @@
 import random
 
 from rpgclasses import User
+from utils import safe_load
 
 class GameState:
 	def __init__(self):
 		self._users = {}
-		# dynamically build this later
-		self.shop_text = "Nothing here yet"
+		
+	def load(self, file):
+		config = safe_load(file)
+		self.shop_text = config["shop-text"]
 
 	def user(self, id):
 		# if user id not found, make a new user
@@ -17,16 +20,10 @@ class GameState:
 		return self._users[id]
 
 class GameInterface:
-	def __init__(self):
+	def __init__(self, file):
 		self.state = GameState()
+		self.state.load(file)
 
-	def mine(self, id):
-		user = self.state.user(id)
-		mine_amt = random.randint(1, 10)
-		user.bal += mine_amt
-
-		return mine_amt
-	
 	def bal(self, id):
 		return self.state.user(id).bal
 

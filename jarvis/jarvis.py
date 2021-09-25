@@ -7,7 +7,7 @@ from rpgmanager import GameInterface
 class Bot(lightbulb.Bot):
 	def __init__(self, *, token, prefix):
 		super().__init__(token=token, prefix=prefix)
-		self.interface = GameInterface()
+		self.interface = GameInterface("config.yml")
 
 		self.add_plugin(RpgPlugin())
 

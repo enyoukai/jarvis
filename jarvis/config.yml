@@ -1,0 +1,5 @@
+---
+shop-text: "It's so cold"
+picks:
+  - name: "Basic Pick"
+    mul: 1
