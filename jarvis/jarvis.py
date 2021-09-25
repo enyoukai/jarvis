@@ -2,7 +2,7 @@ import lightbulb
 import os
 
 from rpgplugin import RpgPlugin
-from rpgmanager import GameInterface
+from interface import GameInterface
 
 class Bot(lightbulb.Bot):
 	def __init__(self, *, token, prefix):
@@ -10,8 +10,6 @@ class Bot(lightbulb.Bot):
 		self.interface = GameInterface("config.yml")
 
 		self.add_plugin(RpgPlugin())
-
-
 
 if __name__ == "__main__":
 	TOKEN = os.environ.get("jarvis")

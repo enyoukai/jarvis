@@ -1,5 +1,5 @@
-from rpgclasses import User
-from rpgclasses import Weapon
+from entities import User
+from items import Weapon
 from utils import safe_load
 
 class GameState:
