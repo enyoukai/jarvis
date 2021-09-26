@@ -20,5 +20,10 @@ class RpgPlugin(lightbulb.Plugin):
 		await ctx.get_channel().send(profile_text)
 
 	@lightbulb.command()
+	async def buy(self, ctx, *, item: str):
+		buy_text = ctx.bot.interface.buy(ctx.author.id, item)
+		await ctx.get_channel().send(buy_text)
+
+	@lightbulb.command()
 	async def fight(self, ctx):
 		pass

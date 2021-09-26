@@ -1,14 +1,19 @@
 from entities import User
 from items import Weapon
 from utils import safe_load
+from utils import to_id
 
 class GameState:
 	def __init__(self):
 		self._users = {}
+		self._items = {}
 		
 	def load(self, file):
 		config = safe_load(file)
-		self._weapons, self._weapons_list = Weapon.loader(config["weapons"])
+		weapons_dict, self._weapons_list = Weapon.loader(config["weapons"])
+
+		self._items = self._items | weapons_dict # merge two dicts
+		print(self._items)
 
 	def user(self, id):
 		# TODO: properly handle key errors later
@@ -43,4 +48,13 @@ class GameInterface:
 	def profile(self, id):
 		return self.state.user(id)
 
+	def buy(self, user_id, item):
+		item_id = to_id(item)
+
+		if item_id in self.state._items:
+			return self.state._items[item_id]
+		
+		else:
+			return "That item does not exist"
+		
 	

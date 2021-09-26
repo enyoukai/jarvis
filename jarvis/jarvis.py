@@ -2,7 +2,7 @@ import lightbulb
 import os
 
 from rpgplugin import RpgPlugin
-from interface import GameInterface
+from rpg import GameInterface
 
 class Bot(lightbulb.Bot):
 	def __init__(self, *, token, prefix):
