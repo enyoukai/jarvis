@@ -13,7 +13,6 @@ class GameState:
 		weapons_dict, self._weapons_list = Weapon.loader(config["weapons"])
 
 		self._items = self._items | weapons_dict # merge two dicts
-		print(self._items)
 
 	def user(self, id):
 		# TODO: properly handle key errors later
