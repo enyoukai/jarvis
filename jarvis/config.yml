@@ -4,8 +4,32 @@ weapons:
   - name: "Wooden Sword"
     value: 0
     atk: 5
-    desc: "So weak lol"
+    desc: "So weak"
+    id: "wooden-sword"
   - name: "Iron Sword"
     value: 100
     atk: 15
     desc: "Now you can fight more than just slimes"
+    id: "iron-sword"
+
+enemies:
+  - name: "Green Slime"
+    hp: 10
+    atk: 1
+    desc: "Idk it's a slime lol"
+    id: "green-slime"
+    
+rooms:
+  - name: "Village"
+    can_rest: true
+    level: 0
+    desc: "We all need to start somewhere"
+    enemies:
+      - "green-slime"
+  
+  - name: "literal hell"
+    can_rest: false
+    level: 666
+    desc: "hot"
+    enemies:
+      - "literal satan"

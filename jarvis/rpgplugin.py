@@ -18,3 +18,7 @@ class RpgPlugin(lightbulb.Plugin):
 		profile_text = ctx.bot.interface.profile(ctx.author.id)
 
 		await ctx.get_channel().send(profile_text)
+
+	@lightbulb.command()
+	async def fight(self, ctx):
+		pass
