@@ -2,17 +2,15 @@ from entities import User
 from items import Weapon
 from utils import safe_load
 from utils import to_id
+from config import Config
 
 class GameState:
 	def __init__(self):
 		self._users = {}
-		self._items = {}
 		
-	def load(self, file):
-		config = safe_load(file)
-		weapons_dict, self._weapons_list = Weapon.loader(config["weapons"])
-
-		self._items = self._items | weapons_dict # merge two dicts
+	def load_game(self, file):
+		data = safe_load(file)
+		self._weapons_dict, self._weapons_list = Weapon.loader(data["weapons"])
 
 	def user(self, id):
 		# TODO: properly handle key errors later
@@ -27,11 +25,11 @@ class GameInterface:
 	to remain (almost) entirely independent 
 	of the discord stuff
 	'''
-	def __init__(self, config):
+	def __init__(self, data):
 		self.state = GameState()
-		self.state.load(config)
+		self.state.load_game(data)
 
-	def bal(self, id):
+	def user_bal(self, id):
 		return self.state.user(id).bal
 
 	def shop(self):
@@ -49,11 +47,22 @@ class GameInterface:
 
 	def buy(self, user_id, item):
 		item_id = to_id(item)
+		user = self.state.user(user_id)
 
-		if item_id in self.state._items:
-			return self.state._items[item_id]
+		# generalize to items later
+		if item_id in self.state._weapons_dict:
+			weapon = self.state._weapons_dict[item_id]
+			
+			if weapon.value > user.bal:
+				return Config.NOT_ENOUGH_MONEY
+			else:
+				user.bal -= weapon.value
+				return Config.PURCHASE_SUCCESSFUL
 		
 		else:
-			return "That item does not exist"
+			return Config.ITEM_NOT_FOUND
+
+			
+
 		
 	

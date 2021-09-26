@@ -5,6 +5,7 @@ weapons:
     atk: 5
     desc: "So weak"
     id: "wooden-sword"
+
   - name: "Iron Sword"
     value: 100
     atk: 15
@@ -23,6 +24,7 @@ rooms:
     can_rest: true
     level: 0
     desc: "We all need to start somewhere"
+    id: "village"
     enemies:
       - "green-slime"
   
